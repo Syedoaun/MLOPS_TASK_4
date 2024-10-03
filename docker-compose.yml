@@ -1,11 +1,11 @@
 version: '3'
 services:
   backend:
-    build: ./backend
+    build: ./back-end
     ports:
       - "5000:5000"
     volumes:
-      - ./backend:/app
+      - ./back-end:/app
     depends_on:
       - db
     environment:
@@ -13,17 +13,17 @@ services:
     command: flask run --host=0.0.0.0
 
   frontend:
-    build: ./frontend
+    build: ./front-end
     ports:
       - "3000:80"
     volumes:
-      - ./frontend:/usr/share/nginx/html
+      - ./front-end:/usr/share/nginx/html
     command: ["nginx", "-g", "daemon off;"]
 
   db:
-    build: ./db
+    build: ./data-base
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
+      - ./data-base:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
     ports:
